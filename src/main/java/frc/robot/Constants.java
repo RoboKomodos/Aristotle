@@ -16,4 +16,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    //controller port
+    public static final int controllerport = 0;
+    //motor controller ports
+
+    //other constants
 }
