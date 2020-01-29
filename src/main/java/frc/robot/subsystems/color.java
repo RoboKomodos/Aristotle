@@ -41,18 +41,18 @@ public class color extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     Color detected = m_ColorSensorV3.getColor();
-    Color c = m_colorMatcher.matchClosestColor(detected).color;
-    if(c==BlueTarget){
-      System.out.println("Blue");
+    ColorMatchResult c = m_colorMatcher.matchClosestColor(detected);
+    if(c.color==BlueTarget){
+      System.out.println("Blue "+c.confidence);
     }
-    else if(c==YellowTarget){
-      System.out.println("Yellow");
+    else if(c.color==YellowTarget){
+      System.out.println("Yellow"+c.confidence);
     }
-    else if(c==GreenTarget){
-      System.out.println("Green");
+    else if(c.color==GreenTarget){
+      System.out.println("Green"+c.confidence);
     }
-    else if(c==RedTarget){
-      System.out.println("Red");
+    else if(c.color==RedTarget){
+      System.out.println("Red"+c.confidence);
     }
   }
 }
