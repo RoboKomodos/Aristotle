@@ -21,4 +21,6 @@ public final class Constants {
     //motor controller ports
 
     //other constants
+    public static final int forwardChannel = 0; //Pneumatic forward channel
+    public static final int reverseChannel = 1; //Pneumatic reverse channel
 }
