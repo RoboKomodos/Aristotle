@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.color;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -22,7 +23,7 @@ public class RobotContainer {
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
 
-
+  color m_color = new color();
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */

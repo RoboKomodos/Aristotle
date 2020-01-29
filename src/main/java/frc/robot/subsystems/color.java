@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorMatchResult;
 
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,16 +19,15 @@ public class color extends SubsystemBase {
 
   ColorSensorV3 m_ColorSensorV3 = new ColorSensorV3(Constants.i2cport);
   ColorMatch m_colorMatcher = new ColorMatch();
+  final Color BlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+  final Color GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+  final Color RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+  final Color YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
   /**
    * Creates a new color.
    */
   public color() {
-   
-
-    final Color BlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-    final Color GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-    final Color RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-    final Color YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+  
 
     m_colorMatcher.addColorMatch(BlueTarget);
     m_colorMatcher.addColorMatch(GreenTarget);
@@ -41,6 +41,18 @@ public class color extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     Color detected = m_ColorSensorV3.getColor();
-    System.out.println(m_colorMatcher.matchClosestColor(detected));
+    Color c = m_colorMatcher.matchClosestColor(detected).color;
+    if(c==BlueTarget){
+      System.out.println("Blue");
+    }
+    else if(c==YellowTarget){
+      System.out.println("Yellow");
+    }
+    else if(c==GreenTarget){
+      System.out.println("Green");
+    }
+    else if(c==RedTarget){
+      System.out.println("Red");
+    }
   }
 }
