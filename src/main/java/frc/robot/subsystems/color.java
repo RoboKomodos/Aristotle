@@ -46,13 +46,13 @@ public class color extends SubsystemBase {
       System.out.println("Blue "+c.confidence);
     }
     else if(c.color==YellowTarget){
-      System.out.println("Yellow"+c.confidence);
+      System.out.println("Yellow "+c.confidence);
     }
     else if(c.color==GreenTarget){
-      System.out.println("Green"+c.confidence);
+      System.out.println("Green "+c.confidence);
     }
     else if(c.color==RedTarget){
-      System.out.println("Red"+c.confidence);
+      System.out.println("Red "+c.confidence);
     }
   }
 }
