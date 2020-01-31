@@ -23,4 +23,5 @@ public final class Constants {
     public static final int rightDrive =1;
 
     //other constants
+    public static final double mikhailModeSpeed=.6;
 }

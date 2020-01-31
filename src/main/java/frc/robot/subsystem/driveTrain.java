@@ -20,20 +20,28 @@ public class driveTrain extends PIDSubsystem {
    */
   private final VictorSPX left = new VictorSPX(Constants.leftDrive);
   private final VictorSPX right = new VictorSPX(Constants.rightDrive);
-  private double speed =1;
+  private double m_speed =1;
   public driveTrain() {
     super(
         // The PIDController used by the subsystem
         new PIDController(0, 0, 0));
   }
-
-  public void setSpeed(double s){
-    speed = s;
+  /**
+   * Set the percent speed for movements.
+   * @param speed double value from zero to one multiplied by motor speed
+   */
+  public void setSpeed(double speed){
+    m_speed = speed;
   }
-
+  /**
+   * A function to drive the the robot with an arcade drive
+   * @param yAxis the forward backward axis
+   * @param xAxis the left right Axis
+   * 
+   */
   public void ArcadeDrive(double yAxis,double xAxis){
-    left.set(ControlMode.PercentOutput, speed*(yAxis+xAxis));
-    right.set(ControlMode.PercentOutput, speed*(yAxis-xAxis));
+    left.set(ControlMode.PercentOutput, m_speed*(yAxis+xAxis));
+    right.set(ControlMode.PercentOutput, m_speed*(yAxis-xAxis));
   }
 
   @Override
