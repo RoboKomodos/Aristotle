@@ -25,6 +25,9 @@ public class color extends SubsystemBase {
   final Color GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
   final Color RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   final Color YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+
+  Color detected;
+  Color needed;
   /**
    * Creates a new color.
    */
@@ -36,6 +39,20 @@ public class color extends SubsystemBase {
     m_colorMatcher.addColorMatch(YellowTarget);
   }
 
+  public void setColor(String neededColor){
+    if(neededColor == "Blue"){
+      Color needed = BlueTarget;
+    }
+    if(neededColor == "Green"){
+      Color needed = GreenTarget;
+    }
+    if(neededColor == "Red"){
+      Color needed = RedTarget;
+    }
+    if(neededColor == "Yellow"){
+      Color needed = YellowTarget;
+    }
+  }
 
 
   @Override
