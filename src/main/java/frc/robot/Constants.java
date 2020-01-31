@@ -24,4 +24,5 @@ public final class Constants {
 
     //other constants
     public static final double mikhailModeSpeed=.6;
+    public static final double pneumaticTimeout=.25;
 }
