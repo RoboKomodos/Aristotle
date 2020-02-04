@@ -53,9 +53,9 @@ public class RobotContainer {
     //while the analog button 3(RT) is pressed set drivespeed to .6 and back to 1 on release
     new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailModeSpeed),m_driveTrain)).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1),m_driveTrain));
     //on the press of the left bumper extend the cylinder up
-    new JoystickButton(xbox, 5).whenPressed(new StartEndCommand(m_pneumatic::extend, m_pneumatic::off, m_pneumatic).withTimeout(Constants.pneumaticTimeout));
+    new AnalogButton(xbox, 6, 0, 20).whenPressed(new StartEndCommand(m_pneumatic::extend, m_pneumatic::off, m_pneumatic).withTimeout(Constants.pneumaticTimeout));
     //on the press of the right bumper extend the cylinder up
-    new JoystickButton(xbox, 6).whenPressed(new StartEndCommand(m_pneumatic::retract, m_pneumatic::off, m_pneumatic).withTimeout(Constants.pneumaticTimeout));
+    new AnalogButton(xbox, 6, 180, 20).whenPressed(new StartEndCommand(m_pneumatic::retract, m_pneumatic::off, m_pneumatic).withTimeout(Constants.pneumaticTimeout));
   }
   
 

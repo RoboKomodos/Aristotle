@@ -46,7 +46,7 @@ public class AnalogButton extends Button{
      * @param joystick the joystick to be used for the button
      * @param axis the axis that should be turned into a button
      * @param location the target value for the button.
-     * @param the range allowed around target value
+     * @param range the range allowed around target value
      */
     public AnalogButton(GenericHID joystick,int axis,int location,int range){
         m_joystick = joystick;
