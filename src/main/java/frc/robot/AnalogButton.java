@@ -46,7 +46,7 @@ public class AnalogButton extends Button{
      * @param joystick the joystick to be used for the button
      * @param axis the axis that should be turned into a button
      * @param location the target value for the button.
-     * @param the range allowed around tarket value
+     * @param the range allowed around target value
      */
     public AnalogButton(GenericHID joystick,int axis,int location,int range){
         m_joystick = joystick;
@@ -58,9 +58,21 @@ public class AnalogButton extends Button{
     @Override
     public boolean get()
     {
-        if(!locationBased)
+        if(!locationBased){
+            //return true if the axis value is above the threshold level.
             return m_joystick.getRawAxis(m_axis)>m_threshold;
+        }
         else
-            return Math.abs(m_joystick.getRawAxis(m_axis)-m_location) < m_threshold;
+        {
+            if (m_joystick.getRawAxis(m_axis)==-1){
+                return false;
+            }
+            //Phi is either the difference in the two angles or 360-phi is the difference
+            double phi = Math.abs(m_joystick.getRawAxis(m_axis)-m_location)%360;
+            //since we know that you cannot be more than 180 degrees away a phi greater than 180 must give a difference of 360-phi
+            double difference = phi<180?phi:360-phi;
+            return difference<m_threshold;
+        }    
+        
     }
 }

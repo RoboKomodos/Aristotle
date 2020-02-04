@@ -23,6 +23,8 @@ public final class Constants {
     public static final int rightDrive =1;
 
     //other constants
+    //Mikhail mode is the mode that reduces the speed of the driving for finer movements.
     public static final double mikhailModeSpeed=.6;
+    //There is a timeout on the solenoid staying on so that it does not overheat.
     public static final double pneumaticTimeout=.25;
 }
