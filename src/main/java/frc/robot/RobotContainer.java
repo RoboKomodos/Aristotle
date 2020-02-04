@@ -36,8 +36,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    m_driveTrain = null;
-    m_pneumatic = null;
+    m_driveTrain = new driveTrain();
+    m_pneumatic = new pneumatic();
     configureButtonBindings();
     //the command for the driving
     //new RunCommand(()->m_driveTrain.ArcadeDrive(xbox.getY(Hand.kLeft), xbox.getX(Hand.kLeft)), m_driveTrain);
