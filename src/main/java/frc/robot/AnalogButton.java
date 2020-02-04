@@ -9,6 +9,7 @@ package frc.robot;
 
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
 /**
@@ -64,11 +65,11 @@ public class AnalogButton extends Button{
         }
         else
         {
-            if (m_joystick.getRawAxis(m_axis)==-1){
+            if (m_joystick.getPOV(m_axis)==-1){
                 return false;
             }
             //Phi is either the difference in the two angles or 360-phi is the difference
-            double phi = Math.abs(m_joystick.getRawAxis(m_axis)-m_location)%360;
+            double phi = Math.abs(m_joystick.getPOV(m_axis)-m_location)%360;
             //since we know that you cannot be more than 180 degrees away a phi greater than 180 must give a difference of 360-phi
             double difference = phi<180?phi:360-phi;
             return difference<m_threshold;

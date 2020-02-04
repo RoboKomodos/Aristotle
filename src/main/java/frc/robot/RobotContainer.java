@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystem.driveTrain;
 import frc.robot.subsystem.pneumatic;
 
@@ -36,11 +36,11 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    m_driveTrain = new driveTrain();
-    m_pneumatic = new pneumatic();
+    m_driveTrain = null;
+    m_pneumatic = null;
     configureButtonBindings();
     //the command for the driving
-    new RunCommand(()->m_driveTrain.ArcadeDrive(xbox.getY(Hand.kLeft), xbox.getX(Hand.kLeft)), m_driveTrain);
+    //new RunCommand(()->m_driveTrain.ArcadeDrive(xbox.getY(Hand.kLeft), xbox.getX(Hand.kLeft)), m_driveTrain);
   }
 
   /**
@@ -53,9 +53,9 @@ public class RobotContainer {
     //while the analog button 3(RT) is pressed set drivespeed to .6 and back to 1 on release
     new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailModeSpeed),m_driveTrain)).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1),m_driveTrain));
     //on the press of the left bumper extend the cylinder up
-    new AnalogButton(xbox, 6, 0, 20).whenPressed(new StartEndCommand(m_pneumatic::extend, m_pneumatic::off, m_pneumatic).withTimeout(Constants.pneumaticTimeout));
+    new AnalogButton(xbox, 0, 0, 45).whenPressed(new StartEndCommand(m_pneumatic::extend, m_pneumatic::off, m_pneumatic).withTimeout(Constants.pneumaticTimeout));
     //on the press of the right bumper extend the cylinder up
-    new AnalogButton(xbox, 6, 180, 20).whenPressed(new StartEndCommand(m_pneumatic::retract, m_pneumatic::off, m_pneumatic).withTimeout(Constants.pneumaticTimeout));
+    new AnalogButton(xbox, 0, 180, 45).whenPressed(new StartEndCommand(m_pneumatic::retract, m_pneumatic::off, m_pneumatic).withTimeout(Constants.pneumaticTimeout));
   }
   
 
