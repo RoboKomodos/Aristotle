@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
+import com.revrobotics.SparkMax;
 
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -31,7 +32,8 @@ public class color extends SubsystemBase {
   //current color values
   Color detected;
   Color needed;
-  Color seenByRobot; //color needed is not what the robot sees
+  //color needed is not what the robot sees
+  Color seenByRobot = BlueTarget;
 
   //declare motor controllers
   Victor motor = new Victor(Constants.colorWheelPort);
