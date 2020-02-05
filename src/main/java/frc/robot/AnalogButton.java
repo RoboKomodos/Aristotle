@@ -46,8 +46,8 @@ public class AnalogButton extends Button{
      * An implementation of button for analog buttons such as the Dpad that has different values for different directions.
      * @param joystick the joystick to be used for the button
      * @param axis the axis that should be turned into a button
-     * @param location the target value for the button.
-     * @param range the range allowed around target value
+     * @param location the target value for the button. E.g. Dpad up is 0, right is 90...
+     * @param range the range allowed around target value. E.g. -5 to 5 == 0.
      */
     public AnalogButton(GenericHID joystick,int axis,int location,int range){
         m_joystick = joystick;
