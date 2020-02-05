@@ -23,4 +23,9 @@ public final class Constants {
     //other constants
     public static final int forwardChannel = 0; //Pneumatic forward channel
     public static final int reverseChannel = 1; //Pneumatic reverse channel
+    public static final int pneumaticAxis = 2;
+    public static final double pneumaticTimeout = .5;
+    public static final int pneumaticUpDegree = 0;
+    public static final int pneumaticDownDegree = 180;
+    public static final int pneumaticRange = 10;
 }

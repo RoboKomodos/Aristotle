@@ -9,7 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.subsystem.*;
 
 /**
@@ -41,7 +41,11 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+    //using analog button, extends pneumatic
+    new AnalogButton(xbox,Constants.pneumaticAxis,Constants.pneumaticUpDegree,Constants.pneumaticRange).whenPressed(new StartEndCommand(m_pneumatic::extend, m_pneumatic::turnOff, m_pneumatic).withTimeout(.5));
+    //using analog button, retracts pneumatic 
+    new AnalogButton(xbox,Constants.pneumaticAxis,Constants.pneumaticDownDegree,Constants.pneumaticRange).whenPressed(new StartEndCommand(m_pneumatic::retract, m_pneumatic::turnOff, m_pneumatic).withTimeout(.5));
+
   }
   
 
