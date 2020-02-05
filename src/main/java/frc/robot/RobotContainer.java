@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystem.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -21,12 +22,14 @@ public class RobotContainer {
   //init controller. use internal functions for getting button presses
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
+  pneumatics m_pneumatic;
 
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    m_pneumatic = new pneumatics();
     // Configure the button bindings
     configureButtonBindings();
   }
