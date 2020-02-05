@@ -54,20 +54,20 @@ public class color extends SubsystemBase {
    */
   public void setColor(String neededColor){
     if(neededColor == "Blue"){
-      Color needed = BlueTarget;
-      Color seenByRobot = RedTarget;
+      needed = BlueTarget;
+      seenByRobot = RedTarget;
     }
     if(neededColor == "Green"){
-      Color needed = GreenTarget;
-      Color seenByRobot = YellowTarget;
+      needed = GreenTarget;
+      seenByRobot = YellowTarget;
     }
     if(neededColor == "Red"){
-      Color needed = RedTarget;
-      Color seenByRobot = BlueTarget;
+      needed = RedTarget;
+      seenByRobot = BlueTarget;
     }
     if(neededColor == "Yellow"){
-      Color needed = YellowTarget;
-      Color seenByRobot = GreenTarget;
+      needed = YellowTarget;
+      seenByRobot = GreenTarget;
     }
   }
 
