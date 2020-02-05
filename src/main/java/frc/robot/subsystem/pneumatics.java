@@ -24,17 +24,17 @@ public class pneumatics extends SubsystemBase {
   }
 
   // Pushes arm Out
-  public void armOut(){
+  public void extend(){
     solenoid.set(DoubleSolenoid.Value.kForward);
   } 
 
   // Pushes arm In
-  public void armIn(){
+  public void retract(){
     solenoid.set(DoubleSolenoid.Value.kReverse);
   } 
 
   // Turns off Solenoid
-  public void armOff(){
+  public void turnOff(){
     solenoid.set(DoubleSolenoid.Value.kOff);
   } 
 
