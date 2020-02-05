@@ -30,7 +30,8 @@
                 "windowsx86",
                 "linuxx86-64",
                 "linuxathena",
-                "linuxraspbian"
+                "linuxraspbian",
+                "macOSX"
             ]
         }
     ]
