@@ -21,7 +21,8 @@ public final class Constants {
     //controller port
     public static final int controllerport = 0;
     //motor controller ports
-
+    public static final int colorWheelPort = 99999;
     //other constants
     public static final I2C.Port i2cport = I2C.Port.kOnboard;
+    public static final double stage2WheelSpeed = 0.1; //color wheel spin speed for stage 2
 }
