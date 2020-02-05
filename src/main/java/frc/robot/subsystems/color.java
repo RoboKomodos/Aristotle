@@ -70,6 +70,29 @@ public class color extends SubsystemBase {
       seenByRobot = GreenTarget;
     }
   }
+  /**
+   * gets current color seen
+   * @return returns current color seen by robot
+   */
+  public Color getCurrentColor(){
+    Color detected = m_ColorSensorV3.getColor();
+    ColorMatchResult c = m_colorMatcher.matchClosestColor(detected);
+    return c.color;
+  }
+
+  /**
+   * tests to see if current color is the needed color
+   * @return t/f depending on color needed
+   */
+  public boolean isColorCorrect(){
+    Color c = getCurrentColor();
+    if(c == seenByRobot){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
   /**
    * detects color and spins to needed color
@@ -113,13 +136,13 @@ public class color extends SubsystemBase {
 
 
   /**
-   * start wheel for stage 2
+   * start wheel
    */
   public void startWheel(){
-    motor.set(Constants.stage2WheelSpeed);
+    motor.set(Constants.colorWheelSpeed);
   }
   /**
-   * stop wheel for stage 2
+   * stop wheel
    */
   public void stopWheel(){
     motor.set(0.0);
