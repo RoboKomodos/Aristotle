@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
 /**
- * Add your docs here.
+ * This is a class that will allow for the analog buttons like the triggers and the dpad to be used as buttons in frc code.
+ * There are three constructors that should all be used in different situations.
  */
 public class AnalogButton extends Button{
     GenericHID m_joystick;
