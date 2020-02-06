@@ -10,7 +10,8 @@ package frc.robot.subsystems;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
-import com.revrobotics.SparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,23 +21,23 @@ import frc.robot.Constants;
 
 public class color extends SubsystemBase {
   //declare color sensor
-  ColorSensorV3 m_ColorSensorV3 = new ColorSensorV3(Constants.i2cport);
+  private ColorSensorV3 m_ColorSensorV3 = new ColorSensorV3(Constants.i2cport);
   //declare color matcher
-  ColorMatch m_colorMatcher = new ColorMatch();
+  private ColorMatch m_colorMatcher = new ColorMatch();
   //declare color values
-  final Color BlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-  final Color GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-  final Color RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-  final Color YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+  private final Color BlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+  private final Color GreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+  private final Color RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+  private final Color YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
   //current color values
-  Color detected;
-  Color needed;
+  private Color detected;
+  private Color needed;
   //color needed is not what the robot sees
-  Color seenByRobot = BlueTarget;
+  private Color seenByRobot = BlueTarget;
 
   //declare motor controllers
-  Victor motor = new Victor(Constants.colorWheelPort);
+  private CANSparkMax motor = new CANSparkMax(Constants.colorWheelPort, MotorType.kBrushless);
 
 
 
@@ -95,46 +96,7 @@ public class color extends SubsystemBase {
       return false;
     }
   }
-
-  /**
-   * detects color and spins to needed color
-   */
-  public void spinToColor(){
-    motor.set(0.05);
-    while(m_colorMatcher.matchClosestColor(m_ColorSensorV3.getColor()).color != seenByRobot){
-      continue;
-    }
-    motor.set(0.0);
-    
-    ///////////////////////////////////////////////////////
-    
-    
-    motor.set(0.05);
-    while(true){
-      Color detected = m_ColorSensorV3.getColor();
-      ColorMatchResult c = m_colorMatcher.matchClosestColor(detected);
-
-      if(c.color==BlueTarget){
-        System.out.println("Blue "+c.confidence);
-      }
-      else if(c.color==YellowTarget){
-        System.out.println("Yellow "+c.confidence);
-      }
-      else if(c.color==GreenTarget){
-        System.out.println("Green "+c.confidence);
-      }
-      else if(c.color==RedTarget){
-        System.out.println("Red "+c.confidence);
-      }
-      if(c.color == seenByRobot){
-        motor.set(0.0);
-        System.out.println("Match "+c.confidence);
-        break;
-      }
-    }
-    
-    
-  }
+  
 
 
   /**
