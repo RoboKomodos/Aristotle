@@ -33,11 +33,12 @@ public class color extends SubsystemBase {
   private final Color YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
 
-  //color needed is not what the robot sees
+  //color needed for the robot to see
   private Color seenByRobot = null;
 
   //declare motor controllers
   private CANSparkMax motor = new CANSparkMax(Constants.colorWheelPort, MotorType.kBrushless);
+  //Hashtable with all of the colors
   private Hashtable<String,Color> DesiredColor= new Hashtable<String,Color>();
 
   /**
@@ -49,6 +50,7 @@ public class color extends SubsystemBase {
     m_colorMatcher.addColorMatch(GreenTarget);
     m_colorMatcher.addColorMatch(RedTarget);
     m_colorMatcher.addColorMatch(YellowTarget);
+    //add color values to the hashtable
     DesiredColor.put("blue",RedTarget);
     DesiredColor.put("green",YellowTarget);
     DesiredColor.put("red",BlueTarget);
@@ -81,14 +83,15 @@ public class color extends SubsystemBase {
 
 
   /**
-   * start wheel
+   * gets needed color and starts spinning the wheel
+   * **for stage 3
    */
-  public void startWheel(){
+  public void startColorSeekingWheel(){
     seenByRobot = DesiredColor.get(DriverStation.getInstance().getGameSpecificMessage().toLowerCase());
     motor.set(Constants.colorWheelSpeed);
   }
   /**
-   * stop wheel
+   * stops wheel
    */
   public void stopWheel(){
     motor.set(0.0);

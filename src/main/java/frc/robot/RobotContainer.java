@@ -43,7 +43,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(xbox, Button.kY.value).whenPressed(new StartEndCommand(m_color::startWheel, m_color::stopWheel, m_color).withInterrupt(m_color::isColorCorrect));
+    new JoystickButton(xbox, Button.kY.value).whenPressed(new StartEndCommand(m_color::startColorSeekingWheel, m_color::stopWheel, m_color).withInterrupt(m_color::isColorCorrect));
     //new StartEndCommand(m_color::startWheel, m_color::stopWheel, m_color).withInterrupt(m_color::isColorCorrect);
   }
   
