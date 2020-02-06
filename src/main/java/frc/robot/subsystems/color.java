@@ -11,12 +11,14 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import java.util.Hashtable;
+
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Victor;
-
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants;
 
 public class color extends SubsystemBase {
@@ -30,16 +32,13 @@ public class color extends SubsystemBase {
   private final Color RedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  //current color values
-  private Color detected;
-  private Color needed;
+
   //color needed is not what the robot sees
   private Color seenByRobot = BlueTarget;
 
   //declare motor controllers
   private CANSparkMax motor = new CANSparkMax(Constants.colorWheelPort, MotorType.kBrushless);
-
-
+  private Hashtable<String,Color> DesiredColor= new Hashtable<String,Color>();
 
   /**
    * Creates a new color.
@@ -50,28 +49,10 @@ public class color extends SubsystemBase {
     m_colorMatcher.addColorMatch(GreenTarget);
     m_colorMatcher.addColorMatch(RedTarget);
     m_colorMatcher.addColorMatch(YellowTarget);
-  }
-  /**
-   * Set needed colors
-   * @param neededColor String e.g. "Blue","Green","Red","Yellow"
-   */
-  public void setColor(String neededColor){
-    if(neededColor == "Blue"){
-      needed = BlueTarget;
-      seenByRobot = RedTarget;
-    }
-    if(neededColor == "Green"){
-      needed = GreenTarget;
-      seenByRobot = YellowTarget;
-    }
-    if(neededColor == "Red"){
-      needed = RedTarget;
-      seenByRobot = BlueTarget;
-    }
-    if(neededColor == "Yellow"){
-      needed = YellowTarget;
-      seenByRobot = GreenTarget;
-    }
+    DesiredColor.put("blue",RedTarget);
+    DesiredColor.put("green",YellowTarget);
+    DesiredColor.put("red",BlueTarget);
+    DesiredColor.put("yellow",GreenTarget);
   }
   /**
    * gets current color seen
@@ -103,6 +84,7 @@ public class color extends SubsystemBase {
    * start wheel
    */
   public void startWheel(){
+    seenByRobot = DesiredColor.get(DriverStation.getInstance().getGameSpecificMessage().toLowerCase());
     motor.set(Constants.colorWheelSpeed);
   }
   /**
