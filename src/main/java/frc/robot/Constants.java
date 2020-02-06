@@ -19,8 +19,9 @@ public final class Constants {
     //controller port
     public static final int controllerport = 0;
     //motor controller ports
-    public static final int outputMotorPort = 9999;
+    public static final int outputMotorPort = 4;
 
     //other constants
     public static final double outputSpeed = 0.3;
+    
 }
