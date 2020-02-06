@@ -34,7 +34,7 @@ public class color extends SubsystemBase {
 
 
   //color needed is not what the robot sees
-  private Color seenByRobot = BlueTarget;
+  private Color seenByRobot = null;
 
   //declare motor controllers
   private CANSparkMax motor = new CANSparkMax(Constants.colorWheelPort, MotorType.kBrushless);
