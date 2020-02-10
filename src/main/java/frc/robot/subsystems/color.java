@@ -10,10 +10,12 @@ package frc.robot.subsystems;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import java.util.Hashtable;
 
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.util.Color;
@@ -40,6 +42,8 @@ public class color extends SubsystemBase {
   private CANSparkMax motor = new CANSparkMax(Constants.colorWheelPort, MotorType.kBrushless);
   //Hashtable with all of the colors
   private Hashtable<String,Color> DesiredColor= new Hashtable<String,Color>();
+
+  private CANPIDController pidcontroller = motor.getPIDController();
 
   /**
    * Creates a new color.
@@ -96,6 +100,13 @@ public class color extends SubsystemBase {
   public void stopWheel(){
     motor.set(0.0);
   }
+
+
+public void multiSpin(){
+  pidcontroller.setReference(64, ControlType.kPosition);
+}
+
+
 
 
   @Override

@@ -10,8 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.color;
 
@@ -44,7 +43,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(xbox, Button.kY.value).whenPressed(new StartEndCommand(m_color::startColorSeekingWheel, m_color::stopWheel, m_color).withInterrupt(m_color::isColorCorrect));
-    //new StartEndCommand(m_color::startWheel, m_color::stopWheel, m_color).withInterrupt(m_color::isColorCorrect);
+    new JoystickButton(xbox, Button.kX.value).whileHeld(new InstantCommand(m_color::multiSpin, m_color));
   }
   
 
