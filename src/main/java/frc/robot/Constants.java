@@ -19,6 +19,7 @@ public final class Constants {
     //controller port
     public static final int controllerport = 0;
     //motor controller ports
-
+    public static final int elevatorPort = 3;
     //other constants
+    public static final double elevatorSpeed = 0.3; //speed for elevator to move at
 }
