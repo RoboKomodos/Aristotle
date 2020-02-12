@@ -27,6 +27,9 @@ public class Elevator extends SubsystemBase {
 
   }
 
+  /**
+   * Toggles "toggle" to activate onSwitch & offSwitch
+   */
   public void toggler(){
     toggle ^= true;
     if(toggle == true){

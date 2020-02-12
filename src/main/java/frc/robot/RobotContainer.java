@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.*;
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -22,7 +26,7 @@ public class RobotContainer {
   //init controller. use internal functions for getting button presses
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
-
+  Elevator m_elevator = new Elevator();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -40,7 +44,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+    //Press "Select" to toggle the Elevator Motor, runs "toggler()"
+    new JoystickButton(xbox, Button.kBack.value).whenPressed(new InstantCommand(m_elevator::toggler,m_elevator));
   }
   
 
