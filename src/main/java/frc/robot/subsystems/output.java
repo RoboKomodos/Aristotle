@@ -23,7 +23,7 @@ public class output extends SubsystemBase {
   }
 
   public void startWheel(){
-    motor.set(ControlMode.PercentOutput,Constants.outputSpeed);
+    motor.set(ControlMode.PercentOutput,-Constants.outputSpeed);
   }
 
   public void stopWheel(){
