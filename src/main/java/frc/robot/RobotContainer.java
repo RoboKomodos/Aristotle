@@ -21,16 +21,17 @@ import frc.robot.subsystems.*;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  //init controller. use internal functions for getting button presses
+  //init controller
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
-  output m_output;
+  output m_output; //output
 
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    //init output object
     m_output = new output();
     // Configure the button bindings
     configureButtonBindings();

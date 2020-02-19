@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class output extends SubsystemBase {
+  //declare motor controller
   VictorSPX motor = new VictorSPX(Constants.outputMotorPort);
   /**
    * Creates a new output.
@@ -21,11 +22,15 @@ public class output extends SubsystemBase {
   public output() {
 
   }
-
+  /**
+   * starts motor
+   */
   public void startWheel(){
     motor.set(ControlMode.PercentOutput,-Constants.outputSpeed);
   }
-
+  /**
+   * stops motor
+   */
   public void stopWheel(){
     motor.set(ControlMode.PercentOutput, 0.0);
   }
