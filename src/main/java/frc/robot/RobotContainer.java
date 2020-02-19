@@ -46,7 +46,7 @@ public class RobotContainer {
       -deadzone(xbox.getX(GenericHID.Hand.kLeft)),
       deadzone(xbox.getY(GenericHID.Hand.kLeft))
     ),m_driveTrain));
-    new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed)));
+    new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed))).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1)));
   }
   /**
    * Removes the oscillation of joystick positions close to zero
