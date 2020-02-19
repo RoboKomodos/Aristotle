@@ -46,8 +46,8 @@ public class color extends SubsystemBase {
 
   private CANPIDController m_pidController = motor.getPIDController();
   private CANEncoder m_encoder = motor.getEncoder();
-  private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
+  private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;{
   kP = 0.1; 
   kI = 1e-4;
   kD = 1; 
@@ -55,6 +55,7 @@ public class color extends SubsystemBase {
   kFF = 0; 
   kMaxOutput = 1; 
   kMinOutput = -1;
+  }
 
   private double rotation = 5.0;
 
