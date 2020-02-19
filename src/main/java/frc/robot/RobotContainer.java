@@ -9,7 +9,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj2.command.*;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -18,15 +21,18 @@ import edu.wpi.first.wpilibj2.command.Command;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  //init controller. use internal functions for getting button presses
+  //init controller
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
+  output m_output; //output
 
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    //init output object
+    m_output = new output();
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -38,7 +44,9 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+    //binds y to output and runs when held
+    new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
+
   }
   
 
