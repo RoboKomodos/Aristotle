@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystem.driveTrain;
 
@@ -41,10 +42,20 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new RunCommand(()->m_driveTrain.arcadeDrive(
-      xbox.getX(GenericHID.Hand.kLeft),
-      xbox.getY(GenericHID.Hand.kLeft)
-    ));
+    m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.arcadeDrive(
+      -deadzone(xbox.getX(GenericHID.Hand.kLeft)),
+      deadzone(xbox.getY(GenericHID.Hand.kLeft))
+    ),m_driveTrain));
+    new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed)));
+  }
+  /**
+   * Removes the oscillation of joystick positions close to zero
+   * @param position is the joystick value between -1 and 1 for the x or y axis
+   * @return double
+   */
+  private double deadzone(double position){
+    double sign = position/Math.abs(position);
+    return Math.abs(position)<=Constants.deadzone?0:sign*(Math.abs(position)-Constants.deadzone)/(1-Constants.deadzone);
   }
   
 

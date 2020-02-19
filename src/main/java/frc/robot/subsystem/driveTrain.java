@@ -18,22 +18,31 @@ public class driveTrain extends PIDSubsystem {
   /**
    * Creates a new driveTrain.
    */
-  private VictorSPX left;
-  private VictorSPX right;
-  private double speed = 1;
+  private VictorSPX m_left;
+  private VictorSPX m_right;
+  private double m_speed = 1;
   public driveTrain() {
     super(
         // The PIDController used by the subsystem
         new PIDController(0, 0, 0));
-    left = new VictorSPX(Constants.leftmotor);
-    right = new VictorSPX(Constants.rightmotor);
+    m_left = new VictorSPX(Constants.leftmotor);
+    m_right = new VictorSPX(Constants.rightmotor);
   }
+  /**
+   * Sets the speed of the motors
+   * @param speed as a double between 0 and 1
+   */
   public void setSpeed(double speed){
-    this.speed = speed;
+    m_speed = speed;
   }
+  /**
+   * Sets the motor speed and direction
+   * @param dx the joystick x position
+   * @param dy the joystick y position
+   */
   public void arcadeDrive(double dx, double dy){
-    left.set(ControlMode.PercentOutput, -speed*( dx+dy));
-    right.set(ControlMode.PercentOutput, speed*( dy-dx));
+    m_left.set(ControlMode.PercentOutput, m_speed*( dx+dy));
+    m_right.set(ControlMode.PercentOutput, m_speed*( dy-dx));
   }
   @Override
   public void useOutput(double output, double setpoint) {
