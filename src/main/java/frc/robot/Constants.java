@@ -21,5 +21,9 @@ public final class Constants {
     //motor controller ports
     public static final int leftMotor = 0;
     public static final int rightMotor = 1;
+    public static final int outputMotorPort = 2;
+
     //other constants
+    public static final double outputSpeed = 1;
+    
 }
