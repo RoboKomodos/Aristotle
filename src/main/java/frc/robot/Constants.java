@@ -24,4 +24,7 @@ public final class Constants {
     //other constants
     public static final double deadzone = 0.05;
     public static final double mikhailSpeed = 0.4;
+    public static final int outputMotorPort = 2;
+    public static final double outputSpeed = 1;
+    
 }
