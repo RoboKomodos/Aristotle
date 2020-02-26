@@ -24,7 +24,7 @@ public class RobotContainer {
   //init controller
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
-  public driveTrain m_driveTrain;
+  driveTrain m_driveTrain;
   output m_output; //output
 
 
@@ -34,8 +34,8 @@ public class RobotContainer {
   public RobotContainer() {
     //init output object
     m_output = new output();
-    // Configure the button bindings
     m_driveTrain = new driveTrain();
+    // Configure the button bindings
     configureButtonBindings();
   }
 
@@ -46,11 +46,15 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    // Sets the drivetrain to always fetch the joystick position
     m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.arcadeDrive(
+      // Applies the deadzone to the left joystick position
       -deadzone(xbox.getX(GenericHID.Hand.kLeft)),
       deadzone(xbox.getY(GenericHID.Hand.kLeft))
     ),m_driveTrain));
+    //When the right trigger is pressed, the robot will be in Mikhail mode
     new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed))).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1)));
+    //binds y to output and runs when held
     new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
   }
   /**
@@ -61,8 +65,6 @@ public class RobotContainer {
   private double deadzone(double position){
     double sign = position/Math.abs(position);
     return Math.abs(position)<=Constants.deadzone?0:sign*(Math.abs(position)-Constants.deadzone)/(1-Constants.deadzone);
-    //binds y to output and runs when held
-
   }
   
 
