@@ -26,12 +26,13 @@ public class RobotContainer {
   //init controller. use internal functions for getting button presses
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
-  Elevator m_elevator = new Elevator();
+  Elevator m_elevator;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    m_elevator = new Elevator();
     // Configure the button bindings
     configureButtonBindings();
     

@@ -44,7 +44,7 @@ public class Elevator extends SubsystemBase {
    * Turns on Elevator Motor
    */
   public void onSwitch() {
-    motor.set(ControlMode.PercentOutput, Constants.elevatorSpeed);
+    motor.set(ControlMode.PercentOutput, -Constants.elevatorSpeed);
   }
 
   /**
