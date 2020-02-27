@@ -15,8 +15,9 @@ import frc.robot.Constants;
 
 public class Elevator extends SubsystemBase {
 
-  //creates instance of victorspx motor controller for elevator motor
+  //motor is the motor controller for elevator. instantiation of VictorSPX
   VictorSPX motor = new VictorSPX(Constants.elevatorPort);
+
 
   private boolean toggle = false;
 
@@ -31,7 +32,8 @@ public class Elevator extends SubsystemBase {
    * Toggles "toggle" to activate onSwitch & offSwitch
    */
   public void toggler(){
-    toggle ^= true;
+    toggle ^= true; //toggle boolean
+    //turn motor on/off based on boolean state
     if(toggle == true){
       onSwitch();
     }
