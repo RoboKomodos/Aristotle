@@ -10,11 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
-
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -23,16 +21,22 @@ import frc.robot.subsystems.*;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  //init controller. use internal functions for getting button presses
+  //init controller
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
   Elevator m_elevator;
+  driveTrain m_driveTrain;
+  output m_output; //output
+
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     m_elevator = new Elevator();
+    //init output object
+    m_output = new output();
+    m_driveTrain = new driveTrain();
     // Configure the button bindings
     configureButtonBindings();
     
@@ -47,6 +51,25 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //Press "Select" to toggle the Elevator Motor, runs "toggler()"
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new InstantCommand(m_elevator::toggler,m_elevator));
+    // Sets the drivetrain to always fetch the joystick position
+    m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.arcadeDrive(
+      // Applies the deadzone to the left joystick position
+      -deadzone(xbox.getX(GenericHID.Hand.kLeft)),
+      deadzone(xbox.getY(GenericHID.Hand.kLeft))
+    ),m_driveTrain));
+    //When the right trigger is pressed, the robot will be in Mikhail mode
+    new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed))).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1)));
+    //binds y to output and runs when held
+    new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
+  }
+  /**
+   * Removes the oscillation of joystick positions close to zero
+   * @param position is the joystick value between -1 and 1 for the x or y axis
+   * @return double
+   */
+  private double deadzone(double position){
+    double sign = position/Math.abs(position);
+    return Math.abs(position)<=Constants.deadzone?0:sign*(Math.abs(position)-Constants.deadzone)/(1-Constants.deadzone);
   }
   
 
