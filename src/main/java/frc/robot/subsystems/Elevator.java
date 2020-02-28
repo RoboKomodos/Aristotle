@@ -18,7 +18,7 @@ public class Elevator extends SubsystemBase {
   //motor is the motor controller for elevator. instantiation of VictorSPX
   VictorSPX motor = new VictorSPX(Constants.elevatorPort);
 
-
+  //boolean to toggle the state (on/off) of the motor
   private boolean toggle = false;
 
   /**
