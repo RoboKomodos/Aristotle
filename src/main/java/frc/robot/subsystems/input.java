@@ -25,7 +25,7 @@ public class input extends SubsystemBase {
    * Spins the green ball sucking motor thing
    */
   public void greenSpin() {
-    m_motor.set(ControlMode.PercentOutput, -Constants.inputSpeed);
+    m_motor.set(ControlMode.PercentOutput, Constants.inputSpeed);
   }
   /**
    * Stops the green spinny thing
