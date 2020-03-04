@@ -28,7 +28,7 @@ public class RobotContainer {
   driveTrain m_driveTrain;
   output m_output; //output
 
-  Input m_input;
+  input m_input;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -37,7 +37,7 @@ public class RobotContainer {
     //init output object
     m_output = new output();
     m_driveTrain = new driveTrain();
-    m_input = new Input(); // Initializes Input
+    m_input = new input(); // Initializes Input
     // Configure the button bindings
     configureButtonBindings();
   }

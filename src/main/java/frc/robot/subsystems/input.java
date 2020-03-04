@@ -13,13 +13,13 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Input extends SubsystemBase {
+public class input extends SubsystemBase {
   //Initializes the motor controller
   VictorSPX m_motor = new VictorSPX(Constants.inputPort);
   /**
    * Creates a new input.
    */
-  public Input() {
+  public input() {
 
   }
   /**
