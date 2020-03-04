@@ -17,6 +17,7 @@ public class videoFeed extends SubsystemBase {
   UsbCamera m_camera1;
   UsbCamera m_camera2;
   VideoSink m_sink;
+  boolean cameraToggle = false;
 
   public videoFeed() {
     m_camera1 = CameraServer.getInstance().startAutomaticCapture(0);
@@ -28,7 +29,12 @@ public class videoFeed extends SubsystemBase {
   }
 
   public void toggle(){
-    m_sink.setSource(m_camera2);
+    if(cameraToggle){
+      m_sink.setSource(m_camera1);
+    }else{
+      m_sink.setSource(m_camera2);
+    }
+    cameraToggle=!cameraToggle;
   }
 
   @Override
