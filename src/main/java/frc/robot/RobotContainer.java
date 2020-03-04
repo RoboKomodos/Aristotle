@@ -24,7 +24,6 @@ public class RobotContainer {
   //init controller
   XboxController xbox = new XboxController(Constants.controllerport);
   // The robot's subsystems and commands are defined here...
-  Elevator m_elevator;
   driveTrain m_driveTrain;
   output m_output; //output
 
@@ -33,13 +32,11 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_elevator = new Elevator();
     //init output object
     m_output = new output();
     m_driveTrain = new driveTrain();
     // Configure the button bindings
     configureButtonBindings();
-    
   }
 
   /**
@@ -49,8 +46,6 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //Press "Select" to toggle the Elevator Motor, runs "toggler()"
-    new JoystickButton(xbox, Button.kBack.value).whenPressed(new InstantCommand(m_elevator::toggler,m_elevator));
     // Sets the drivetrain to always fetch the joystick position
     m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.arcadeDrive(
       // Applies the deadzone to the left joystick position
