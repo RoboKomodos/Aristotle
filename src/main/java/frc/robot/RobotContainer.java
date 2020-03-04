@@ -27,6 +27,7 @@ public class RobotContainer {
   Elevator m_elevator;
   driveTrain m_driveTrain;
   output m_output; //output
+  videoFeed m_videoFeed;
 
 
   /**
@@ -36,7 +37,10 @@ public class RobotContainer {
     m_elevator = new Elevator();
     //init output object
     m_output = new output();
+    //init drivetrain
     m_driveTrain = new driveTrain();
+    //init cameras
+    m_videoFeed = new videoFeed();
     // Configure the button bindings
     configureButtonBindings();
     
@@ -61,6 +65,8 @@ public class RobotContainer {
     new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed))).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1)));
     //binds y to output and runs when held
     new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
+    // Set button binding for the camera toggle
+    new JoystickButton(xbox, Button.kB.value).whenPressed(new InstantCommand(m_videoFeed::toggle, m_videoFeed));
   }
   /**
    * Removes the oscillation of joystick positions close to zero

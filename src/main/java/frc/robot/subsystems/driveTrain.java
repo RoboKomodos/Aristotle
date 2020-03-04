@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
@@ -20,6 +21,7 @@ public class driveTrain extends PIDSubsystem {
    */
   private VictorSPX m_left;
   private VictorSPX m_right;
+  private AnalogGyro m_gyro;
   private double m_speed = 1;
   public driveTrain() {
     super(
