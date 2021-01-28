@@ -23,13 +23,13 @@ public class input extends SubsystemBase {
 
   }
   /**
-   * Spins the green ball sucking motor thing
+   * Starts input motors
    */
-  public void greenSpin() {
+  public void startSpin() {
     m_motor.set(ControlMode.PercentOutput, Constants.inputSpeed);
   }
   /**
-   * Stops the green spinny thing
+   * Stops input motors
    */
   public void stopSpin() {
     m_motor.set(ControlMode.PercentOutput, 0);
