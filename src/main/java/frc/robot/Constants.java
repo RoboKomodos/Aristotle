@@ -18,6 +18,12 @@ package frc.robot;
 public final class Constants {
     //controller port
     public static final int controllerport = 0;
+    //port for ball sucker thing in ipor
+    public static final int inputPort = 3;
+    //press button for thing above
+    public static final double  inputSpeed = .6;
+
+     
     //motor controller ports
     public static final int elevatorPort = 4;
     public static final int leftmotor = 0;

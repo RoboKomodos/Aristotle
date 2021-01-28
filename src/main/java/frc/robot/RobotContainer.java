@@ -23,11 +23,13 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   //init controller
   XboxController xbox = new XboxController(Constants.controllerport);
+  
   // The robot's subsystems and commands are defined here...
   Elevator m_elevator;
   driveTrain m_driveTrain;
   output m_output; //output
 
+  input m_input;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -37,6 +39,7 @@ public class RobotContainer {
     //init output object
     m_output = new output();
     m_driveTrain = new driveTrain();
+    m_input = new input(); // Initializes Input
     // Configure the button bindings
     configureButtonBindings();
     
@@ -61,6 +64,8 @@ public class RobotContainer {
     new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed))).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1)));
     //binds y to output and runs when held
     new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
+    // Maps the Intake spinny thing to the 'A' button
+    new JoystickButton( xbox, Button.kA.value).whenPressed(new InstantCommand(m_input::startSpin, m_input)).whenReleased(new InstantCommand(m_input::stopSpin, m_input));
   }
   /**
    * Removes the oscillation of joystick positions close to zero
