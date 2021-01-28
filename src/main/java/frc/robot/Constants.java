@@ -25,10 +25,12 @@ public final class Constants {
 
      
     //motor controller ports
+    public static final int elevatorPort = 4;
     public static final int leftmotor = 0;
     public static final int rightmotor = 1;
     public static final int outputMotorPort = 2;
     //other constants
+    public static final double elevatorSpeed = 0.6; //speed for elevator to move at
     public static final double deadzone = 0.05;
     public static final double mikhailSpeed = 0.35;
     public static final double outputSpeed = 1;
