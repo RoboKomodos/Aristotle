@@ -28,8 +28,8 @@ public class RobotContainer {
   Elevator m_elevator;
   driveTrain m_driveTrain;
   output m_output; //output
-
   input m_input;
+  color m_color;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -40,6 +40,7 @@ public class RobotContainer {
     m_output = new output();
     m_driveTrain = new driveTrain();
     m_input = new input(); // Initializes Input
+    m_color = new color();
     // Configure the button bindings
     configureButtonBindings();
     
@@ -61,11 +62,13 @@ public class RobotContainer {
       deadzone(xbox.getY(GenericHID.Hand.kLeft))
     ),m_driveTrain));
     //When the right trigger is pressed, the robot will be in Mikhail mode
-    new AnalogButton(xbox, 3).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed))).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1)));
+    new AnalogButton(xbox, Constants.mikhailAxis).whenPressed(new InstantCommand(()->m_driveTrain.setSpeed(Constants.mikhailSpeed))).whenReleased(new InstantCommand(()->m_driveTrain.setSpeed(1)));
     //binds y to output and runs when held
     new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
-    // Maps the Intake spinny thing to the 'A' button
+    //binds a to input, run when held.
     new JoystickButton( xbox, Button.kA.value).whenPressed(new InstantCommand(m_input::startSpin, m_input)).whenReleased(new InstantCommand(m_input::stopSpin, m_input));
+    //Stage 3 color wheel. Bound to right on D-pad
+    new AnalogButton(xbox, Constants.colorWheelAxis, Constants.stage3Degree).whenPressed(new StartEndCommand(m_color::startColorSeekingWheel, m_color::stopWheel, m_color).withInterrupt(m_color::isColorCorrect));
   }
   /**
    * Removes the oscillation of joystick positions close to zero
