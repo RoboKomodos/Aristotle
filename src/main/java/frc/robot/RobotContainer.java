@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
 
+
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -25,9 +26,11 @@ public class RobotContainer {
   XboxController xbox = new XboxController(Constants.controllerport);
   
   // The robot's subsystems and commands are defined here...
+  pneumatics m_pneumatic;
   Elevator m_elevator;
   driveTrain m_driveTrain;
   output m_output; //output
+
 
   input m_input;
 
@@ -35,6 +38,7 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    m_pneumatic = new pneumatics();
     m_elevator = new Elevator();
     //init output object
     m_output = new output();
@@ -52,6 +56,11 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //using analog button, extends pneumatic
+    new AnalogButton(xbox,Constants.pneumaticAxis,Constants.pneumaticUpDegree,Constants.pneumaticRange).whenPressed(new StartEndCommand(m_pneumatic::extend, m_pneumatic::turnOff, m_pneumatic).withTimeout(.5));
+    //using analog button, retracts pneumatic 
+    new AnalogButton(xbox,Constants.pneumaticAxis,Constants.pneumaticDownDegree,Constants.pneumaticRange).whenPressed(new StartEndCommand(m_pneumatic::retract, m_pneumatic::turnOff, m_pneumatic).withTimeout(.5));
+
     //Press "Select" to toggle the Elevator Motor, runs "toggler()"
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new InstantCommand(m_elevator::toggler,m_elevator));
     // Sets the drivetrain to always fetch the joystick position

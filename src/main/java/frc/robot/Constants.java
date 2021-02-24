@@ -30,6 +30,15 @@ public final class Constants {
     public static final int rightmotor = 1;
     public static final int outputMotorPort = 2;
     //other constants
+
+    public static final int forwardChannel = 0; //Pneumatic forward channel
+    public static final int reverseChannel = 1; //Pneumatic reverse channel
+    public static final int pneumaticAxis = 2;
+    public static final double pneumaticTimeout = .5;
+    public static final int pneumaticUpDegree = 0;
+    public static final int pneumaticDownDegree = 180;
+    public static final int pneumaticRange = 10;
+
     public static final double elevatorSpeed = 0.6; //speed for elevator to move at
     public static final double deadzone = 0.05;
     public static final double mikhailSpeed = 0.35;
