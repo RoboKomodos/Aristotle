@@ -1,2 +1,2 @@
 #codeowners
-* @cgannaway @sjakem
+* @cgannaway

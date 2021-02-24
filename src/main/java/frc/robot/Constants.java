@@ -18,9 +18,19 @@ package frc.robot;
 public final class Constants {
     //controller port
     public static final int controllerport = 0;
-    //motor controller ports
+    //port for ball sucker thing in ipor
+    public static final int inputPort = 3;
+    //press button for thing above
+    public static final double  inputSpeed = .6;
 
+     
+    //motor controller ports
+    public static final int elevatorPort = 4;
+    public static final int leftmotor = 0;
+    public static final int rightmotor = 1;
+    public static final int outputMotorPort = 2;
     //other constants
+
     public static final int forwardChannel = 0; //Pneumatic forward channel
     public static final int reverseChannel = 1; //Pneumatic reverse channel
     public static final int pneumaticAxis = 2;
@@ -28,4 +38,10 @@ public final class Constants {
     public static final int pneumaticUpDegree = 0;
     public static final int pneumaticDownDegree = 180;
     public static final int pneumaticRange = 10;
+
+    public static final double elevatorSpeed = 0.6; //speed for elevator to move at
+    public static final double deadzone = 0.05;
+    public static final double mikhailSpeed = 0.35;
+    public static final double outputSpeed = 1;
+    
 }
