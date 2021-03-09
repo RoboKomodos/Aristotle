@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
+import frc.robot.sequences.*;
 
 
 /**
@@ -30,9 +31,9 @@ public class RobotContainer {
   Elevator m_elevator;
   driveTrain m_driveTrain;
   output m_output; //output
-
-
   input m_input;
+
+  testSequence test;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -75,6 +76,7 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
     // Maps the Intake spinny thing to the 'A' button
     new JoystickButton( xbox, Button.kA.value).whenPressed(new InstantCommand(m_input::startSpin, m_input)).whenReleased(new InstantCommand(m_input::stopSpin, m_input));
+    new JoystickButton(xbox, Button.kStart.value).whenPressed(test);
   }
   /**
    * Removes the oscillation of joystick positions close to zero
