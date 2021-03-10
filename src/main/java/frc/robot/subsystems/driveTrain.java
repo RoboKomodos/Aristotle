@@ -27,6 +27,9 @@ public class driveTrain extends PIDSubsystem {
         new PIDController(0, 0, 0));
     m_left = new VictorSPX(Constants.leftmotor);
     m_right = new VictorSPX(Constants.rightmotor);
+
+    m_left.configOpenloopRamp(0.5);
+    m_right.configOpenloopRamp(0.5);
   }
   /**
    * Sets the speed of the motors
