@@ -22,7 +22,8 @@ public class testSequence extends SequentialCommandGroup {
       new stop().withTimeout(0.3),
       new back().withTimeout(0.5),
       new stop().withTimeout(0.3),
-      new spinRight().withTimeout(0.5)
+      new spinRight().withTimeout(0.5),
+      new stop()
     );
   }
 }
