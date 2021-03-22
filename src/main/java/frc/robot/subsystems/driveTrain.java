@@ -44,6 +44,7 @@ public class driveTrain extends PIDSubsystem {
    * @param dy the joystick y position
    */
   public void arcadeDrive(double dx, double dy){
+    dx = -dx;
     m_left.set(ControlMode.PercentOutput, m_speed*( dx+dy));
     m_right.set(ControlMode.PercentOutput, m_speed*( dy-dx));
   }

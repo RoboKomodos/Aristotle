@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
 import frc.robot.sequences.*;
+import frc.robot.autocommands.*;
 
 
 /**
@@ -33,7 +34,7 @@ public class RobotContainer {
   output m_output; //output
   input m_input;
 
-  testSequence test;
+
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -67,7 +68,7 @@ public class RobotContainer {
     // Sets the drivetrain to always fetch the joystick position
     m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.arcadeDrive(
       // Applies the deadzone to the left joystick position
-      -deadzone(xbox.getX(GenericHID.Hand.kLeft)),
+      deadzone(xbox.getX(GenericHID.Hand.kLeft)),
       deadzone(xbox.getY(GenericHID.Hand.kLeft))
     ),m_driveTrain));
     //When the right trigger is pressed, the robot will be in Mikhail mode
@@ -76,7 +77,7 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
     // Maps the Intake spinny thing to the 'A' button
     new JoystickButton( xbox, Button.kA.value).whenPressed(new InstantCommand(m_input::startSpin, m_input)).whenReleased(new InstantCommand(m_input::stopSpin, m_input));
-    new JoystickButton(xbox, Button.kStart.value).whenPressed(new testSequence());
+    new JoystickButton(xbox, Button.kStart.value).whenPressed(new testSequence(m_driveTrain));
   }
   /**
    * Removes the oscillation of joystick positions close to zero

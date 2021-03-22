@@ -4,23 +4,35 @@
 
 package frc.robot.autocommands;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.driveTrain;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class forward extends InstantCommand {
+public class forward extends CommandBase {
+  /** Creates a new testDrive. */
   driveTrain drive;
-  public forward() {
+  public forward(driveTrain subsystem) {
+    drive = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    drive = new driveTrain();
     addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drive.arcadeDrive(0.8, 0.0);
+    drive.arcadeDrive(1.0,0.0);
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {}
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {}
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
   }
 }

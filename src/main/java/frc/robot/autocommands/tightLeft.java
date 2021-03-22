@@ -7,12 +7,11 @@ package frc.robot.autocommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.driveTrain;
 
-public class spinLeft extends CommandBase {
-  /** Creates a new spinLeft. */
+public class tightLeft extends CommandBase {
+  /** Creates a new tightLeft. */
   driveTrain drive;
-  public spinLeft(driveTrain subsystem) {
+  public tightLeft(driveTrain subsystem) {
     drive = subsystem;
-    addRequirements(drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -23,7 +22,7 @@ public class spinLeft extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.arcadeDrive(0.0, -0.5);
+    drive.arcadeDrive(1.0, -0.8);
   }
 
   // Called once the command ends or is interrupted.

@@ -12,9 +12,9 @@ import frc.robot.subsystems.driveTrain;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class stop extends InstantCommand {
   driveTrain drive;
-  public stop() {
+  public stop(driveTrain subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    drive = new driveTrain();
+    drive = subsystem;
     addRequirements(drive);
   }
 
