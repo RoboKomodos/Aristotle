@@ -23,7 +23,7 @@ public class reverse extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.arcadeDrive(-1.0, 0.0);
+    drive.arcadeDrive(0.0, -1.0);
   }
 
   // Called once the command ends or is interrupted.

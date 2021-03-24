@@ -14,8 +14,6 @@ import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
 import frc.robot.sequences.*;
-import frc.robot.autocommands.*;
-
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -77,7 +75,7 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kY.value).whenPressed(new InstantCommand(m_output::startWheel, m_output)).whenReleased(new InstantCommand(m_output::stopWheel, m_output));
     // Maps the Intake spinny thing to the 'A' button
     new JoystickButton( xbox, Button.kA.value).whenPressed(new InstantCommand(m_input::startSpin, m_input)).whenReleased(new InstantCommand(m_input::stopSpin, m_input));
-    new JoystickButton(xbox, Button.kStart.value).whenPressed(new testSequence(m_driveTrain));
+    new JoystickButton(xbox, Button.kStart.value).whenPressed(new SlalomPath(m_driveTrain));
   }
   /**
    * Removes the oscillation of joystick positions close to zero

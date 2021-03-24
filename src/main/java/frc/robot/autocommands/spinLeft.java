@@ -23,7 +23,7 @@ public class spinLeft extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.arcadeDrive(0.0, -0.5);
+    drive.arcadeDrive(-0.5, 0.0);
   }
 
   // Called once the command ends or is interrupted.

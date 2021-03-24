@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
+import java.lang.System;
+
 
 public class driveTrain extends PIDSubsystem {
   /**
@@ -44,6 +46,7 @@ public class driveTrain extends PIDSubsystem {
    * @param dy the joystick y position
    */
   public void arcadeDrive(double dx, double dy){
+    System.out.println(dx + " " + dy);
     dx = -dx;
     m_left.set(ControlMode.PercentOutput, m_speed*( dx+dy));
     m_right.set(ControlMode.PercentOutput, m_speed*( dy-dx));

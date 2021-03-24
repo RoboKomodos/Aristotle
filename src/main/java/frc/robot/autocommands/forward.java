@@ -19,7 +19,7 @@ public class forward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drive.arcadeDrive(1.0,0.0);
+    drive.arcadeDrive(0.0,1.0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
