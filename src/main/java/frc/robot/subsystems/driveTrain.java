@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 import java.lang.System;
+import java.io.File;
 
 
 public class driveTrain extends PIDSubsystem {
@@ -23,6 +24,7 @@ public class driveTrain extends PIDSubsystem {
   private VictorSPX m_left;
   private VictorSPX m_right;
   private double m_speed = 1;
+
   public driveTrain() {
     super(
         // The PIDController used by the subsystem
@@ -32,6 +34,8 @@ public class driveTrain extends PIDSubsystem {
 
     m_left.configOpenloopRamp(0.5);
     m_right.configOpenloopRamp(0.5);
+    File f = new File("dataout.txt");
+    
   }
   /**
    * Sets the speed of the motors
@@ -47,6 +51,7 @@ public class driveTrain extends PIDSubsystem {
    */
   public void arcadeDrive(double dx, double dy){
     System.out.println(dx + " " + dy);
+    
     dx = -dx;
     m_left.set(ControlMode.PercentOutput, m_speed*( dx+dy));
     m_right.set(ControlMode.PercentOutput, m_speed*( dy-dx));
