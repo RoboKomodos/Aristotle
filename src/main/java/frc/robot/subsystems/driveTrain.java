@@ -15,6 +15,12 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 import java.lang.System;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 
 public class driveTrain extends PIDSubsystem {
@@ -24,6 +30,7 @@ public class driveTrain extends PIDSubsystem {
   private VictorSPX m_left;
   private VictorSPX m_right;
   private double m_speed = 1;
+  private OutputStream outputStream;
 
   public driveTrain() {
     super(
@@ -34,8 +41,26 @@ public class driveTrain extends PIDSubsystem {
 
     m_left.configOpenloopRamp(0.5);
     m_right.configOpenloopRamp(0.5);
-    File f = new File("dataout.txt");
-    
+    try {
+      File file = new File("dataout.txt")
+      if(!file.exists()){
+        file.createNewFile();
+      }
+      outputStream = new FileOutputStream(file);
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
+
+  private void write(String s) {
+    try {
+      outputStream.write(s.getBytes());
+      outputStream.flush();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
   /**
    * Sets the speed of the motors
@@ -50,7 +75,7 @@ public class driveTrain extends PIDSubsystem {
    * @param dy the joystick y position
    */
   public void arcadeDrive(double dx, double dy){
-    System.out.println(dx + " " + dy);
+    write(dx + " " + dy);
     
     dx = -dx;
     m_left.set(ControlMode.PercentOutput, m_speed*( dx+dy));
