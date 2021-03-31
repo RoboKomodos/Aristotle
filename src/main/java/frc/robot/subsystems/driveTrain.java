@@ -21,7 +21,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import org.java_websocket.WebSocket;
+import org.java_websocket.drafts.Draft;
+import org.java_websocket.drafts.Draft_6455;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.server.WebSocketServer;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
+import java.util.Collections;
 
 public class driveTrain extends PIDSubsystem {
   /**
@@ -31,6 +43,61 @@ public class driveTrain extends PIDSubsystem {
   private VictorSPX m_right;
   private double m_speed = 1;
   private OutputStream outputStream;
+  private ChatServer server;
+
+  class ChatServer extends WebSocketServer {
+
+    public ChatServer(int port) throws UnknownHostException {
+        super(new InetSocketAddress(port));
+    }
+
+    public ChatServer(InetSocketAddress address) {
+        super(address);
+    }
+
+    public ChatServer(int port, Draft_6455 draft) {
+        super(new InetSocketAddress(port), Collections.<Draft>singletonList(draft));
+    }
+
+    @Override
+    public void onOpen(WebSocket conn, ClientHandshake handshake) {
+    }
+
+    @Override
+    public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+
+    }
+
+    @Override
+    public void onMessage(WebSocket conn, String message) {
+        broadcast(message);
+        System.out.println(conn + ": " + message);
+    }
+
+    @Override
+    public void onMessage(WebSocket conn, ByteBuffer message) {
+    }
+
+    public void print(String s){
+        broadcast(s);
+    }
+
+    @Override
+    public void onError(WebSocket conn, Exception ex) {
+        ex.printStackTrace();
+        if (conn != null) {
+            // some errors like port binding failed may not be assignable to a specific websocket
+        }
+    }
+
+    @Override
+    public void onStart() {
+        System.out.println("Server started!");
+        setConnectionLostTimeout(0);
+        setConnectionLostTimeout(100);
+    }
+
+}
 
   public driveTrain() {
     super(
@@ -41,26 +108,9 @@ public class driveTrain extends PIDSubsystem {
 
     m_left.configOpenloopRamp(0.5);
     m_right.configOpenloopRamp(0.5);
-    try {
-      File file = new File("dataout.txt")
-      if(!file.exists()){
-        file.createNewFile();
-      }
-      outputStream = new FileOutputStream(file);
-    } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
-
-  private void write(String s) {
-    try {
-      outputStream.write(s.getBytes());
-      outputStream.flush();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    int port = 1180;
+    server = new ChatServer(port);
+    s.start();
   }
   /**
    * Sets the speed of the motors
@@ -75,7 +125,7 @@ public class driveTrain extends PIDSubsystem {
    * @param dy the joystick y position
    */
   public void arcadeDrive(double dx, double dy){
-    write(dx + " " + dy);
+    server.print(dx + " " + dy);
     
     dx = -dx;
     m_left.set(ControlMode.PercentOutput, m_speed*( dx+dy));
