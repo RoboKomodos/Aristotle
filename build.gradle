@@ -77,3 +77,11 @@ jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
 }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.java-websocket:Java-WebSocket:1.5.1"
+}
